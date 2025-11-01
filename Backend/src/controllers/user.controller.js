@@ -52,7 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
     res.cookie('token', token);
 
     res.status(200).json(
-        new ApiResponse(200, 'User LoggedinSuccessfully', { token, user })
+        new ApiResponse(200, 'User Logged in Successfully', { token, user })
     );
 })
 const getUserProfile = asyncHandler(async (req, res) => {

@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home.jsx'
 import UserLogin from './pages/UserLogin.jsx'
 import UserRegister from './pages/UserRegister.jsx'
-import CaptianLogin from './pages/CaptianLogin.jsx'
+import CaptainLogin from './pages/CaptainLogin.jsx'
 import CaptainRegister from './pages/CaptainRegister.jsx'
 
 const router = createBrowserRouter([
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <UserRegister />
       },
       {
-        path: '/capatainLogin',
-        element: <CaptianLogin />
+        path: '/captainLogin',
+        element: <CaptainLogin />
       },
       {
         path: '/captainRegister',

@@ -2,26 +2,39 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import {Input, Button} from '../components'
+import { Input, Button } from '../components'
 const UserLogin = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
-  
-  const { register, handleSubmit } = useForm()
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
 
   const navigate = useNavigate()
 
   const submit = async (data) => {
+
     try {
       setIsLoading(true)
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}`, data)
-      const info = response.data
-      console.log(info);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/users/login`, data)
+      if (response.status === 200) {
+        const data = response.data
+        localStorage.setItem('token', data?.data?.token)
 
+        console.log(data.data.token);
+
+        navigate('/')
+      }
 
     } catch (error) {
       console.log('Error while Submitting form', error);
-
+      setMessage(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   return (
@@ -35,7 +48,7 @@ const UserLogin = () => {
 
           <Input
             type="email"
-            {...register('identifier', {
+            {...register('email', {
               required: true,
               validate: {
                 matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
