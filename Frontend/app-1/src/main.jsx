@@ -8,6 +8,10 @@ import UserLogin from './pages/UserLogin.jsx'
 import UserRegister from './pages/UserRegister.jsx'
 import CaptainLogin from './pages/CaptainLogin.jsx'
 import CaptainRegister from './pages/CaptainRegister.jsx'
+import { UserProvider } from './context/UserContext.jsx'
+import UserProtectedRoute from './pages/UserProtectedRoute.jsx'
+import { CaptainProvider } from './context/CaptainContext.jsx'
+import CaptainHome from './pages/CaptainHome.jsx'
 
 const router = createBrowserRouter([
   {
@@ -15,33 +19,45 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: '/home',
+        element: (
+          <UserProtectedRoute>
+            <Home />
+          </UserProtectedRoute>
+        ),
       },
       {
         path: '/userLogin',
-        element: <UserLogin />
+        element: <UserLogin />,
       },
       {
         path: '/userRegister',
-        element: <UserRegister />
+        element: <UserRegister />,
       },
       {
         path: '/captainLogin',
-        element: <CaptainLogin />
+        element: <CaptainLogin />,
       },
       {
         path: '/captainRegister',
-        element: <CaptainRegister />
+        element: <CaptainRegister />,
+      },
+      {
+        path: '/captainHome',
+        element: (
+          <CaptainProvider>
+            <CaptainHome />
+          </CaptainProvider>
+        )
       }
-    ]
-  }
+    ],
+  },
 ])
-createRoot(document.getElementById('root')).render(
 
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
-  </StrictMode>,
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  </StrictMode>
 )

@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { Button, Input } from '../components'
 const CaptainLogin = () => {
-  console.log('Captain');
 
 
   const navigate = useNavigate()

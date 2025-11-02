@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { Input, Button } from '../components'
+import { UserContextData } from '../context/createUserContext'
 const UserLogin = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -13,6 +14,7 @@ const UserLogin = () => {
       password: ''
     }
   })
+  const {user, setUser} = useContext(UserContextData)
 
   const navigate = useNavigate()
 
@@ -26,13 +28,12 @@ const UserLogin = () => {
         localStorage.setItem('token', data?.data?.token)
 
         console.log(data.data.token);
-
+        setUser({...data?.data?.user})
         navigate('/')
       }
 
     } catch (error) {
       console.log('Error while Submitting form', error);
-      setMessage(error)
     } finally {
       setIsLoading(false)
     }
