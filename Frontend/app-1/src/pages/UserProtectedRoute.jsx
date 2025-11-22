@@ -10,15 +10,13 @@ const UserProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-console.log('token', token);
+    console.log('token', token);
 
-    // no token = not logged in
     if (!token) {
       navigate('/userLogin')
       return
     }
 
-    // fetch profile only once
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
@@ -28,7 +26,6 @@ console.log('token', token);
           },
         )
 
-        // Save user to context
         setUser(res.data.data)
         setLoading(false)
       } catch (err) {

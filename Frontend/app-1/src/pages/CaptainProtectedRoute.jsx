@@ -28,7 +28,7 @@ console.log('token', token);
         )
 
         // Save user to context
-        setUser(res.data.data)
+        setCaptain(res.data.data)
       } catch (err) {
         console.error('Profile fetch failed:', err)
         localStorage.removeItem('token')
@@ -37,7 +37,7 @@ console.log('token', token);
     }
 
     fetchProfile()
-  }, [navigate, setUser])
+  }, [navigate, setCaptain])
     return (
         <div>
             {children}

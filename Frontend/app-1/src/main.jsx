@@ -12,6 +12,8 @@ import { UserProvider } from './context/UserContext.jsx'
 import UserProtectedRoute from './pages/UserProtectedRoute.jsx'
 import { CaptainProvider } from './context/CaptainContext.jsx'
 import CaptainHome from './pages/CaptainHome.jsx'
+import CaptainProtectedRoute from './pages/CaptainProtectedRoute.jsx'
+import Riding from './pages/Riding.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
         element: (
           <UserProtectedRoute>
             <Home />
+          </UserProtectedRoute>
+        ),
+      },
+      {
+        path: '/riding',
+        element: (
+          <UserProtectedRoute>
+            <Riding />
           </UserProtectedRoute>
         ),
       },
@@ -45,19 +55,22 @@ const router = createBrowserRouter([
       {
         path: '/captainHome',
         element: (
-          <CaptainProvider>
+          <CaptainProtectedRoute>
             <CaptainHome />
-          </CaptainProvider>
+          </CaptainProtectedRoute>
         )
-      }
+      },
+
     ],
   },
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
+    <CaptainProvider>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </CaptainProvider>
   </StrictMode>
 )

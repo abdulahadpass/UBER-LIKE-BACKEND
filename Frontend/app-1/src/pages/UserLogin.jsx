@@ -29,7 +29,7 @@ const UserLogin = () => {
 
         console.log(data.data.token);
         setUser({...data?.data?.user})
-        navigate('/')
+        navigate('/home')
       }
 
     } catch (error) {

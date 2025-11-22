@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { Button, Input } from '../components'
+import { CaptainContextData } from '../context/createCaptainContext'
 const CaptainLogin = () => {
 
 
@@ -11,17 +12,20 @@ const CaptainLogin = () => {
 
   const { register, handleSubmit } = useForm()
 
+  const { setCaptain } = useContext(CaptainContextData)
+  
   const submit = async (data) => {
     console.log(data);
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/captains/login`, data)
       console.log(response);
-      
+
       if (response.status === 200) {
         const data = response.data
         localStorage.setItem('token', data?.data?.token)
-        navigate('/')
+        setCaptain({ ...data?.data?.captain })
+        navigate('/home')
       }
 
 
@@ -59,7 +63,7 @@ const CaptainLogin = () => {
           />
 
           <Button
-          type='submit'
+            type='submit'
             className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
           >Login</Button>
 
