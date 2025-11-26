@@ -34,7 +34,7 @@ const registerCaptain = asyncHandler(async (req, res) => {
 
     res.status(201).json(
         new ApiResponse(201, 'Captain registered successfully', { token, captain })
-    );
+    );get
 })
 const loginCaptain = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -59,7 +59,13 @@ const loginCaptain = asyncHandler(async (req, res) => {
         new ApiResponse(200, 'captain Logged in, successfully', { token, captain })
     );
 })
+const getCapttainProfile = asyncHandler(async (req, res) => {
+    return res.status(200).json(
+        new ApiResponse(200, 'Captain Profile Fetched Successfully', {captain : req.captain})
+    )
+})
 export {
     registerCaptain,
-    loginCaptain
+    loginCaptain,
+    getCapttainProfile
 }

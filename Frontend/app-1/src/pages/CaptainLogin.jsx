@@ -25,7 +25,7 @@ const CaptainLogin = () => {
         const data = response.data
         localStorage.setItem('token', data?.data?.token)
         setCaptain({ ...data?.data?.captain })
-        navigate('/home')
+        navigate('/captainHome')
       }
 
 
