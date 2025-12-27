@@ -43,7 +43,7 @@ const FinishRide = (props) => {
 
                 <div className='mt-10 w-full'>
                     
-                    <Link to='/captain-home' className='w-full mt-5 flex  text-lg justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Finish Ride</Link>
+                    <Link to='/captainHome' className='w-full mt-5 flex  text-lg justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Finish Ride</Link>
                     
                     
                 </div>

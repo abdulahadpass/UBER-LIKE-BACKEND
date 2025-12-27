@@ -15,11 +15,9 @@ const CaptainLogin = () => {
   const { setCaptain } = useContext(CaptainContextData)
   
   const submit = async (data) => {
-    console.log(data);
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/captains/login`, data)
-      console.log(response);
 
       if (response.status === 200) {
         const data = response.data
